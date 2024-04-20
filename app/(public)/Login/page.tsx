@@ -1,23 +1,24 @@
 'use client'
 
-import {z} from 'zod';
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import {LockKeyhole, LockKeyholeOpen} from 'lucide-react';
+import { LockKeyhole, LockKeyholeOpen } from 'lucide-react';
+import Link from 'next/link';
 
 const formSchema = z.object({
     email: z
-    .string()
-    .min(1, "E-mail Obrigatório")
-    .email("E-mail Inválido"),
+        .string()
+        .min(1, "E-mail Obrigatório")
+        .email("E-mail Inválido"),
     password: z
-    .string()
-    .min(1, "Senha Obrigatória")
-    
+        .string()
+        .min(1, "Senha Obrigatória")
+
 })
 
 const Login = () => {
@@ -40,42 +41,45 @@ const Login = () => {
         <div className='flex justify-center h-[100vh] items-center p-4'>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className='flex gap-2 flex-col w-full max-w-sm'>
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='email'
-                        render={({field})=> (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>E-mail</FormLabel>
                                 <FormControl>
-                                    <Input placeholder='E-mail ...' {...field} className='h-[50px] text-md'/>
+                                    <Input placeholder='E-mail ...' {...field} className='h-[50px] text-md' />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='password'
-                        render={({field})=> (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>Senha</FormLabel>
                                 <FormControl>
                                     <div className='flex relative items-center'>
-                                    <Input placeholder='Senha ...' {...field} type={open ? 'text' : 'password'} className='h-[50px] text-md'/>
-                                    <Button variant='ghost' 
-                                            size='icon' 
+                                        <Input placeholder='Senha ...' {...field} type={open ? 'text' : 'password'} className='h-[50px] text-md' />
+                                        <Button variant='ghost'
+                                            size='icon'
                                             type='button'
                                             className='absolute hover:bg-transparent left-[88%]'
                                             onClick={() => setOpen(!open)}
-                                            >
-                                        {open ? <LockKeyholeOpen /> : <LockKeyhole />}
-                                    </Button>
+                                        >
+                                            {open ? <LockKeyholeOpen /> : <LockKeyhole />}
+                                        </Button>
                                     </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <div className='flex justify-end'>
+                        <Link href='/Cadastro'>Cadastrar-se ?</Link>
+                    </div>
                     <Button variant='default' type='submit' className='text-md h-[50px]'>
                         Entrar
                     </Button>
