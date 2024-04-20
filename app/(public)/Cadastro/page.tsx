@@ -1,35 +1,36 @@
 'use client'
 
-import {z} from 'zod';
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {LockKeyhole, LockKeyholeOpen} from 'lucide-react';
+import { LockKeyhole, LockKeyholeOpen } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const formSchema = z.object({
     nome: z
-    .string()
-    .min(1, "Nome Obrigatório"),
+        .string()
+        .min(1, "Nome Obrigatório"),
     email: z
-    .string()
-    .min(1, "E-mail Obrigatório")
-    .email("E-mail Inválido"),
+        .string()
+        .min(1, "E-mail Obrigatório")
+        .email("E-mail Inválido"),
     password: z
-    .string()
-    .min(1, "Senha Obrigatória"),
+        .string()
+        .min(1, "Senha Obrigatória"),
     confimadPassword: z
-    .string()
-    .min(1, "Confirmação Obrigatória")
+        .string()
+        .min(1, "Confirmação Obrigatória")
 }).refine(
     (values) => {
         return values.password === values.confimadPassword
     },
     {
         message: "As Senhas Devem Ser Iguais",
-        path:["confimadPassword"]
+        path: ["confimadPassword"]
     }
 )
 
@@ -46,7 +47,7 @@ const Cadastro = () => {
             password: '',
             confimadPassword: ''
         }
-        
+
     })
 
     const handleSubmit = (data: z.infer<typeof formSchema>) => {
@@ -57,78 +58,81 @@ const Cadastro = () => {
         <div className='flex justify-center h-[100vh] items-center p-4'>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className='flex gap-2 flex-col w-full max-w-sm'>
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='nome'
-                        render={({field}) => (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>Nome</FormLabel>
                                 <FormControl>
-                                    <Input placeholder='Nome ...' {...field} className='h-[50px] text-md'/>
+                                    <Input placeholder='Nome ...' {...field} className='h-[50px] text-md' />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='email'
-                        render={({field}) => (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>E-mail</FormLabel>
                                 <FormControl>
-                                    <Input placeholder='E-mail ...' {...field} className='h-[50px] text-md'/>
+                                    <Input placeholder='E-mail ...' {...field} className='h-[50px] text-md' />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='password'
-                        render={({field}) => (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>Senha</FormLabel>
                                 <FormControl>
                                     <div className='flex relative items-center'>
-                                    <Input placeholder='Senha ...' {...field} className='h-[50px] text-md' type={openPassword ? 'text' : 'password'}/>
-                                    <Button variant='ghost' 
-                                            size='icon' 
+                                        <Input placeholder='Senha ...' {...field} className='h-[50px] text-md' type={openPassword ? 'text' : 'password'} />
+                                        <Button variant='ghost'
+                                            size='icon'
                                             type='button'
                                             className='absolute hover:bg-transparent left-[88%]'
                                             onClick={() => setOpenPassword(!openPassword)}
-                                            >
-                                        {openPassword ? <LockKeyholeOpen /> : <LockKeyhole />}
-                                    </Button>
+                                        >
+                                            {openPassword ? <LockKeyholeOpen /> : <LockKeyhole />}
+                                        </Button>
                                     </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <FormField 
+                    <FormField
                         control={form.control}
                         name='confimadPassword'
-                        render={({field}) => (
+                        render={({ field }) => (
                             <FormItem>
                                 <FormLabel className='text-md'>Confirmação Senha</FormLabel>
                                 <FormControl>
                                     <div className='flex relative items-center'>
-                                    <Input placeholder='Senha ...' {...field} className='h-[50px] text-md' type={openConfirmadPassword ? 'text' : 'password'}/>
-                                    <Button variant='ghost' 
-                                            size='icon' 
+                                        <Input placeholder='Senha ...' {...field} className='h-[50px] text-md' type={openConfirmadPassword ? 'text' : 'password'} />
+                                        <Button variant='ghost'
+                                            size='icon'
                                             type='button'
                                             className='absolute hover:bg-transparent left-[88%]'
                                             onClick={() => setOpenConfirmadPassword(!openConfirmadPassword)}
-                                            >
-                                        {openConfirmadPassword ? <LockKeyholeOpen /> : <LockKeyhole />}
-                                    </Button>
+                                        >
+                                            {openConfirmadPassword ? <LockKeyholeOpen /> : <LockKeyhole />}
+                                        </Button>
                                     </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <div className='flex justify-end'>
+                        <Link href="/Login">Login ?</Link>
+                    </div>
                     <Button variant='default' type='submit' className='text-md h-[50px]'>
                         Cadastrar
                     </Button>
