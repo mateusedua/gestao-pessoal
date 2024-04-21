@@ -3,9 +3,9 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/_components/ui/form';
+import { Input } from '@/_components/ui/input';
+import { Button } from '@/_components/ui/button';
 import { useState } from 'react';
 import { LockKeyhole, LockKeyholeOpen } from 'lucide-react';
 import Link from 'next/link';
@@ -77,7 +77,7 @@ const Login = () => {
                             </FormItem>
                         )}
                     />
-                    <div className='flex justify-end'>
+                    <div className='flex justify-end hover: '>
                         <Link href='/Cadastro'>Cadastrar-se ?</Link>
                     </div>
                     <Button variant='default' type='submit' className='text-md h-[50px]'>

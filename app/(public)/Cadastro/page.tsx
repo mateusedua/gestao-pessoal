@@ -3,9 +3,9 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/_components/ui/form';
+import { Input } from '@/_components/ui/input';
+import { Button } from '@/_components/ui/button';
 import { LockKeyhole, LockKeyholeOpen } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
